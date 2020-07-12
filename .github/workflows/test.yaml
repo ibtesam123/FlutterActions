@@ -1,0 +1,22 @@
+name: Run tests on code
+on:
+  pull_request:
+    branches:
+      - development
+jobs:
+  test:
+    name: Flutter run tests
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Setup Java SDK 12
+      uses: actions/setup-java@v1
+      with:
+        java-version: '12.x'
+    - name: Setup Flutter Environment
+      uses: subosito/flutter-action@v1
+      with:
+        channel: 'stable'
+    - run: flutter pub get
+    - name: Start testing 
+      run: flutter test
